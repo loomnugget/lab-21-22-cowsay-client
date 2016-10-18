@@ -5,14 +5,31 @@
     <title> Cowsay Client </title>
   </head>
   <body>
-    <section ng-controller="CowsayController">
+
+    <nav ng-controller="NavController as navCtrl">
+      <i class="fa fa-low-vision"> </i>
+      <ul>
+        <li ng-repeat="navItem in navCtrl.routes">
+          <a ng-href="{{navItem.url}}"> {{navItem.name}} </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section ng-controller="CowsayController as cowsayCtrl">
+      <!-- directives change functionality of a tag-->
     <h1> {{cowsayCtrl.title}} </h1>
       <input type="text" ng-model="cowsayCtrl.text">
+      <!-- ng-model - assigns a variable on the ng-controller scope -->
       <button ng-click="cowsayCtrl.helloClick(cowsayCtrl.text)"> Populate with cow</button>
       <button ng-click="cowsayCtrl.resetClick()"> Reset with previous </button>
 
+      <!-- modified every time the input is changed - due to 2 way data binding  -->
+      <!-- re-render view every time the model changes -->
       <pre> {{cowsayCtrl.updateCow(cowsayCtrl.text)}} </pre>
+      <!-- JS expressions can happen inside of quotes and {{}} - can always access info in current scope -->
+
       <pre>{{cowsayCtrl.populate}}</pre>
+
     </section>
 
   </body>
