@@ -1,0 +1,12 @@
+$app-bg: #131313;
+$app-color: #fff;
+$app-font: 'Open Sans', sans-serif;
+
+body {
+  background-color: $app-bg;
+  font-size: 150%;
+  color: $app-color;
+  font-family: $app-font;
+  width: 50%;
+  margin: 1% 25%;
+}

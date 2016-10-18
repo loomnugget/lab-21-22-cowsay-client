@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title> Cowsay Client </title>
+  </head>
+  <body>
+    <section ng-controller="CowsayController">
+    <h1> {{cowsayCtrl.title}} </h1>
+      <input type="text" ng-model="cowsayCtrl.text">
+      <button ng-click="cowsayCtrl.helloClick(cowsayCtrl.text)"> Populate with cow</button>
+      <button ng-click="cowsayCtrl.resetClick()"> Reset with previous </button>
+
+      <pre> {{cowsayCtrl.updateCow(cowsayCtrl.text)}} </pre>
+      <pre>{{cowsayCtrl.populate}}</pre>
+    </section>
+
+  </body>
+</html>
