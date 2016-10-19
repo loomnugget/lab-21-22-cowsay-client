@@ -23,18 +23,17 @@ demoApp.controller('CowsayController', [ '$log', CowsayController]);
 
 function CowsayController($log){
   $log.debug('init cowsayCtrl');
-  this.title = 'Derp!';
+  this.title = 'Derp cows';
   this.data = [];
 
   cowsay.list((err, cowfiles) => {
     this.cowfiles = cowfiles;
     this.currentCow = this.cowfiles[0];
-    console.log('this.cowfiles', this.cowfiles);
   });
 
   this.updateCow = function(input){
     $log.debug('this.updateCow()');
-    return '\n' + cowsay.say({text: input || 'give me all the says'});
+    return '\n' + cowsay.say({text: input || 'give me all the says', f:this.currentCow});
   };
   this.helloClick = function(input){
     $log.debug('this.helloClick()');
@@ -44,6 +43,7 @@ function CowsayController($log){
   };
   this.resetClick = function(){
     $log.debug('this.resetClick()');
+    this.data.pop();
     this.populate = this.updateCow(this.data.pop() || '');
   };
 }
@@ -77,4 +77,9 @@ function NavController($log){
       url: '/contact',
     },
   ];
+
+  this.selectedItem = function (active) {
+    this.active = active;
+  };
+
 }

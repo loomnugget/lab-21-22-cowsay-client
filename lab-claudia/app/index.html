@@ -7,28 +7,63 @@
   <body>
 
     <nav ng-controller="NavController as navCtrl">
-      <i class="fa fa-low-vision"> </i>
+      <i ng-class="moving" class="fa fa-star fa-3x"> </i>
+    </br></br>
+      <button type="button"
+      ng-click="moving='move'"> Move Star</button>
+      <button type="button"
+      ng-click="moving=''"> Move Back</button>
       <ul>
         <li ng-repeat="navItem in navCtrl.routes">
-          <a ng-href="{{navItem.url}}"> {{navItem.name}} </a>
+          <a ng-class="{'active':$active===navCtrl.active}" ng-click="navCtrl.selectedItem($active)" ng-href="#"> {{navItem.name}} </a>
+        </div>
         </li>
       </ul>
     </nav>
 
-    <section ng-controller="CowsayController as cowsayCtrl">
+    <section ng-controller="CowsayController as cowsayCtrl"
+    ng-init="cowsayCtrl.currentCow = 'dragon'">
+
       <!-- directives change functionality of a tag-->
     <h1> {{cowsayCtrl.title}} </h1>
-      <input type="text" ng-model="cowsayCtrl.text">
-      <!-- ng-model - assigns a variable on the ng-controller scope -->
-      <button ng-click="cowsayCtrl.helloClick(cowsayCtrl.text)"> Populate with cow</button>
-      <button ng-click="cowsayCtrl.resetClick()"> Reset with previous </button>
+    <form ng-submit="cowsayCtrl.helloClick(cowsayCtrl.text)"
+      novalidate
+      name="cowsayForm"
+      ng-class="{'app-red': cowsayForm.$invalid, 'app-green': cowsayForm.$valid}" >
+      <input type="text" name="input" ng-model="cowsayCtrl.text" ng-required="true" ng-minlength="4" ng-maxlength ="10">
+      <select ng-model="cowsayCtrl.currentCow">
+        <option ng-repeat="cowfile in cowsayCtrl.cowfiles" value="{{cowfile}}">
+          {{cowfile}}
+        </option>
+      </select>
 
+      <button type="submit"
+      ng-class="{blue: hover}"
+      ng-mouseenter="hover = true"
+      ng-mouseleave="hover = false"> Speak </button>
+
+      <button type="button"
+      ng-click="cowsayCtrl.resetClick()"> Undo </button>
+    </br></br>
+      <span class = "error" ng-show="cowsayForm.input.$error.minlength">
+      Too short!</span>
+      <span class = "error" ng-show="cowsayForm.input.$error.maxlength">
+      Too long!</span>
+      <span class = "error" ng-show="cowsayForm.input.$error.required">
+      Put something!</span>
+
+    </form>
       <!-- modified every time the input is changed - due to 2 way data binding  -->
       <!-- re-render view every time the model changes -->
       <pre> {{cowsayCtrl.updateCow(cowsayCtrl.text)}} </pre>
       <!-- JS expressions can happen inside of quotes and {{}} - can always access info in current scope -->
 
-      <pre>{{cowsayCtrl.populate}}</pre>
+
+      <h3 ng-if="!cowsayCtrl.populate">Dargons!</h3>
+      <p ng-hide="cowsayCtrl.populate"> Dargon wants a friend.</p>
+      <pre ng-show="cowsayCtrl.populate">
+       {{cowsayCtrl.populate}}
+     </pre>
 
     </section>
 
