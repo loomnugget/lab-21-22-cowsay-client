@@ -1,10 +1,5 @@
-@import "~font-awesome/scss/font-awesome.scss";
-
-$app-bg: #2a2a2a;
-$app-color: #eee8f3;
-$app-font: 'Open Sans', sans-serif;
-$app-red: #ff6666;
-
+@import "_vendor";
+@import "_theme";
 
 body {
   background-color: $app-bg;
@@ -21,7 +16,7 @@ body {
 }
 
 .app-green input {
-  border: 2px solid #fff;
+  border: 2px solid $app-white;
 }
 
 h1 {
@@ -50,14 +45,18 @@ button, input, select {
 button, input {
   text-align: center;
   color: $app-color;
-  background-color: #131313;
+  background-color: $app-darkgrey;
 }
 
 .blue {
   background-color: $app-red;
 }
+.white {
+  background-color: $app-white;
+  color: $app-black;
+}
 
-.active{
+.activeSelected{
   background-color: $app-red;
 }
 

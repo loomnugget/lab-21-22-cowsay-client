@@ -80,6 +80,7 @@ function NavController($log){
 
   this.selectedItem = function (active) {
     this.active = active;
+    console.log(this.active);
   };
 
 }

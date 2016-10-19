@@ -15,7 +15,8 @@
       ng-click="moving=''"> Move Back</button>
       <ul>
         <li ng-repeat="navItem in navCtrl.routes">
-          <a ng-class="{'active':$active===navCtrl.active}" ng-click="navCtrl.selectedItem($active)" ng-href="#"> {{navItem.name}} </a>
+          <a ng-click="navCtrl.selectedItem($active)" ng-href="#">
+            {{navItem.name}} </a>
         </div>
         </li>
       </ul>
@@ -42,7 +43,7 @@
       ng-mouseenter="hover = true"
       ng-mouseleave="hover = false"> Speak </button>
 
-      <button type="button"
+      <button type="button" ng-class= "{blue:cowCtrl === default}"
       ng-click="cowsayCtrl.resetClick()"> Undo </button>
     </br></br>
       <span class = "error" ng-show="cowsayForm.input.$error.minlength">
@@ -55,7 +56,7 @@
     </form>
       <!-- modified every time the input is changed - due to 2 way data binding  -->
       <!-- re-render view every time the model changes -->
-      <pre> {{cowsayCtrl.updateCow(cowsayCtrl.text)}} </pre>
+      <pre ng-class= "{white:cowCtrl === default}" > {{cowsayCtrl.updateCow(cowsayCtrl.text)}} </pre>
       <!-- JS expressions can happen inside of quotes and {{}} - can always access info in current scope -->
 
 
