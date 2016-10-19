@@ -57,7 +57,7 @@ demoApp.controller('NavController', [ '$log', NavController]);
 //allows us to use 'this' - less things to inject
 
 function NavController($log){
-  $log.debug('init NavCtrl');
+  $log.debug('init navCtrl');
   //makes the object thing on its own and everything is added to that scope
   this.routes = [
     {

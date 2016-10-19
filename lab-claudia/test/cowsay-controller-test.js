@@ -5,18 +5,18 @@ require('./lib/setup.js');
 const cowsay = require('cowsay-browser');
 const angular = require('angular');
 
-// expect is built into jasmine
-// only has beforeeach and aftereach, no before, after, or done
+// TESTING COWSAY CONTROLLER
 describe('testing cowsayCtrl', function() {
   beforeEach(() => {
     //mock module the controller is associated with
     angular.mock.module('demoApp');
     //creates a new controller, each time a test is run
-    //scope is reinitialized every time a test is run - they have the same state
+    //need to inject the controller since it is not available on the global scope
     angular.mock.inject($controller => {
       this.cowsayCtrl = new $controller('CowsayController');
     });
   });
+
   describe('testing initial properties', () => {
     it('title should equal derp cows', () => {
       expect(this.cowsayCtrl.title).toBe('Derp cows');
@@ -59,5 +59,50 @@ describe('testing cowsayCtrl', function() {
       expect(this.cowsayCtrl.data.length).toEqual(0);
     });
   });
+});
 
+// TESTING NAV CONTROLLER
+describe('testing NavCtrl', function() {
+  beforeEach(() => {
+    angular.mock.module('demoApp');
+    angular.mock.inject($controller => {
+      this.navCtrl = new $controller('NavController');
+    });
+  });
+
+  describe('testing initial properties', () => {
+    it('should return an array', () => {
+      expect(Array.isArray(this.navCtrl.routes)).toBe(true);
+    });
+    it('should return an correct name', () => {
+      expect(this.navCtrl.routes[0].name).toEqual('Home');
+    });
+    it('should return a correct url', () => {
+      expect(this.navCtrl.routes[0].url).toEqual('/home');
+    });
+    it('should return an correct name', () => {
+      expect(this.navCtrl.routes[1].name).toEqual('About');
+    });
+    it('should return a correct url', () => {
+      expect(this.navCtrl.routes[1].url).toEqual('/about');
+    });
+    it('should return an correct name', () => {
+      expect(this.navCtrl.routes[2].name).toEqual('Cow Facts');
+    });
+    it('should return a correct url', () => {
+      expect(this.navCtrl.routes[2].url).toEqual('/cowfacts');
+    });
+    it('should return an correct name', () => {
+      expect(this.navCtrl.routes[3].name).toEqual('Contact');
+    });
+    it('should return a correct url', () => {
+      expect(this.navCtrl.routes[3].url).toEqual('/contact');
+    });
+  });
+  describe('testing #selectedItem()', () => {
+    it('should return active', () => {
+      this.navCtrl.selectedItem('active'); //undo from
+      expect(this.navCtrl.active).toEqual('active');
+    });
+  });
 });
